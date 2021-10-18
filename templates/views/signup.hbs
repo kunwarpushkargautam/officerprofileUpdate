@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{>header}}
+
+<body>
+    <div class="cover">
+        {{>navbar}}
+
+        <div class="row mx-auto justify-content-center ">
+            <div class="col-11 col-md-7 col-sm-8 col-lg-6 mx-auto mt-3 logbox curve h-100 shadow py-4">
+                <p class="text-secondary text-center my-2">Greetings!! Officer, we are Proud Of You!!</p>
+
+                <h3 class="text-center text-info mx-auto mb-4">SIGNUP FORM</h3>
+                <form action="/signup" method="POST">
+                    <div class="row  my-2 mx-auto justify-content-center">
+                     
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Full Name</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="text" placeholder="Full Name"
+                                name="fullname" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Email</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="email" placeholder="xyz@abc.com"
+                                name="email" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Post</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="text" placeholder="Current Post"
+                                name="currentPost" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Department</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="text" placeholder="current Department"
+                                name="currentDepartment">
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">City</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="text" placeholder="Current Posting City"
+                                name="postCity" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">State</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="text" placeholder="Current Posting State"
+                                name="postState" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Date Of Birth</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="date" placeholder="" name="dob" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center">
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Password</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="password" placeholder="password"
+                                name="password" required>
+                        </div>
+                    </div>
+                    <div class="row  my-2 mx-auto justify-content-center"> 
+                        <div class="col-12 col-md-4  col-xl-3">
+                            <p class=" py-1 my-0 h6 text-info px-2">Password</p>
+                        </div>
+                        <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                            <input class="w-100 py-1 border curve px-2" type="password" placeholder="Confirm password"
+                                name="confirmPassword" required>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center ">
+
+                        <input type="submit" value="Signup"
+                            class="my-2 py-2 px-4 curve bg-info h5 text-white border-0"></input>
+                    </div>
+                    </form>
+                    <p class="text-center mb-0 text-info">Already Have an Account?</p>
+                    <div class="text-center mb-4">
+
+                        <a href="/login"> <button
+                                class=" py-2 px-4 mt-2 text-info border h6 bg-white  border-info curve">SignIn</button></a>
+                    </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    {{>scriptcdn}}
+</body>
+
+</html>

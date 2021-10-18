@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{>header}}
+
+<body>
+    <div class="">
+        {{>navout}}
+
+
+
+        <div class="row my-2 mx-auto">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3  pt-3 mx-auto text-center">
+                <img src="../uploads/{{userData.image}}" class="img-width" alt="">
+
+            </div>
+            <button class="curve bg-white border-0 my-0 py-0" type="button" class="btn  shadow text-info"
+                data-bs-toggle="modal" data-bs-target="#staticBackdropPic">
+                <i class="fa text-info fa-pen-to-square"></i>Upload
+            </button>
+        </div>
+        {{>imagepicker}}
+
+        <div class="row my-3 mx-auto">
+
+            <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto">
+                <!-- Button trigger modal -->
+                <div class="text-end mx-auto"><button type="button" id="edit" class="btn  shadow text-info"
+                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa text-info fa-pen-to-square"></i> Edit
+                    </button></div>
+                <form action="/profile" method="POST">
+                    <ul class=" px-0 ">
+                        <li class=" row justify-content-center my-2   py-2 mx-auto w-100 bg-warning">
+                            <label class="col-11 text-white my-1 h5 ">General Details :</label>
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto justify-content-center">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Fullname</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6 text-secondary">{{userData.fullname}}</span>
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Date Of Birth :</label>
+                            <p class="col-11 h6 my-1 text-secondary  col-md-7 col-lg-6">
+                                {{bdaydates.date}}-{{bdaydates.month}}-{{bdaydates.year}}</p>
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Post :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.post}} name="currentPost">
+                        </li>
+
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Department :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.department}} name="currentDepartment">
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Period therein :</label>
+                            <input type="date" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.postPeriod}} name="postPeriod">
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Posting City :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.postCity}} name="postCity">
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Posting State :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.postState}} name="postState">
+                        </li>
+
+                        <li class=" row justify-content-center my-2 mx-auto bg-warning shadow  p-2 ">
+                            <label class="col-9  my-1    col-lg-11 h5 text-white   ">Personal Details:</label>
+
+                        </li>
+
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Marital Status :</label>
+
+                            <select name="marital" class="col-11 h6 border  my-1  col-md-7 col-lg-6 noOpt" id="marital">
+
+
+                                <option value={{userData.information.marital}}>{{userData.information.marital}}
+                                </option>
+                                <option value="Single" class=""> Single
+                                </option>
+                                <option value="Married" class=""> Married
+                                </option>
+                                <option value="Engaged" class=""> Engaged
+                                </option>
+                                <option value="Other" class=""> Other
+                                </option>
+                            </select>
+                        </li>
+
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home City:</label>
+                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.homeCity}} name="homeCity">
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home District:</label>
+                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.homeDist}} name="homeDist">
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home State:</label>
+                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.homeState}} name="homeState">
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Height :</label>
+                            <input type="number" class="col-8 h6 border    col-md-6 col-lg-5" min="050" max="300"
+                                readonly="true" value={{userData.information.height}} name="height"><span
+                                class="col-3 h6   col-md-1 col-lg-1">cm</span>
+
+                        </li>
+
+                        <li class=" row justify-content-center my-2 mx-auto shadow bg-warning  p-2">
+                            <label class="col-9 h5 text-white my-1">Educational Details:</label>
+
+                        </li>
+
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Highest Education :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.degree}} name="degree">
+                        </li>
+
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">University :</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.university}} name="university">
+                        </li>
+                        <li class=" row justify-content-center my-2 mx-auto shadow bg-warning  p-2">
+                            <label class="col-11 h5 text-white  my-1 ">Recruitment Details:</label>
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Recruitment type:</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.recruitmentType}} name="recruitmentType">
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Year Of Induction:</label>
+                            <input type="date" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value={{userData.information.appointmentYear}} name="appointmentYear">
+
+                        </li>
+                        <div class="mx-auto text-center my-3 d-none" id="button">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="cancelButton">Cancel</button>
+                            <input type="submit" class="btn btn-primary" value="Update"></input>
+                        </div>
+                    </ul>
+                </form>
+                <!-- Button trigger modal -->
+
+
+            </div>
+            <div class="row">
+                <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto"><button type="button"
+                        class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                        Password Reset
+                    </button></div>
+            </div>
+
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content p-3">
+                        <div class="text-end ">
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/resetPassword" method="post">
+                            <div class="modal-body justify-content-center mx-auto w-100 ">
+                                <h5 class="modal-title text-center mx-auto" id="staticBackdropLabel">Reset Password</h5>
+                                <div class="row my-2 py-2 mx-auto align-item-center">
+                                    <div class="mx-auto col-11 col-md-5 px-0">
+                                        <h6 class="text-secondary">Current Password</h6>
+                                    </div>
+                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
+                                        <input type="password" class="w-100 curve" name="currentPassword">
+                                    </div>
+                                </div>
+                                <div class="row my-2 py-2 mx-auto align-item-center">
+                                    <div class="mx-auto col-11 col-md-5 px-0">
+                                        <h6 class="text-secondary">New Password</h6>
+                                    </div>
+                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
+                                        <input type="password" class="w-100 curve" name="newPassword">
+                                    </div>
+                                </div>
+                                <div class="row my-2 py-2 mx-auto align-item-center">
+                                    <div class="mx-auto col-11 col-md-5 px-0">
+                                        <h6 class="text-secondary">Confirm Password</h6>
+                                    </div>
+                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
+                                        <input type="password" class="w-100 curve" name="cNewPassword">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center justify-content-center m-1">
+                                <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-outline-success px-5">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>editfunction}}
+
+
+        {{>scriptcdn}}
+
+</body>
+
+</html>

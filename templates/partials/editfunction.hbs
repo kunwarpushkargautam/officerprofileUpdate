@@ -1,0 +1,52 @@
+<script>
+    var input = document.getElementsByTagName("input");
+    var len = input.length;
+    var buttons = document.getElementById('button');
+    var cancelButton = document.getElementById('cancelButton');
+    var editButton = document.getElementById('edit');
+    var maritaloptions = document.getElementById('marital');
+    
+    window.addEventListener("load",()=>{
+        console.log("hii i am working");
+         for (let i = 0; i < len; i++) {
+            
+            input[i].classList.add('border-0');
+        }
+    })
+    
+    document.getElementById("edit").addEventListener("click", () => {
+
+
+        for (let i = 0; i < len; i++) {
+            input[i].removeAttribute('readonly');
+            input[i].classList.remove('border-0');
+        }
+        buttons.classList.remove('d-none');
+        editButton.classList.add('invisible');
+        maritaloptions.classList.remove('noOpt');
+        
+        
+        
+        
+
+    });
+
+    cancelButton.addEventListener("click", () => {
+        for (let i = 0; i < len; i++) {
+            input[i].setAttribute('readonly', true);
+            input[i].classList.add('border-0');
+        }
+        buttons.classList.add('d-none');
+        editButton.classList.remove('invisible');
+        maritaloptions.classList.add('noOpt');
+        
+        
+        
+    });
+            // input.setAttribute(attr);
+
+
+
+
+
+</script>

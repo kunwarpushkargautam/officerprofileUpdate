@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{>header}}
+
+<body>
+
+    {{>navbar}}
+    <!--Section: Contact v.2-->
+
+    <div class="row mx-auto justify-content-center mt-4">
+        <div class="col-11 col-md-7 col-sm-8 col-lg-5 mx-auto mt-3 logbox curve h-100 shadow py-4">
+
+            <h3 class="text-center text-info mx-auto mb-4">Contact Us</h3>
+            <form action="/contact" method="POST">
+                <div class="row  my-2 mx-auto justify-content-center">
+
+                    <div class="col-12 col-md-3  col-xl-2">
+                        <p class=" py-1 my-0 h6 text-info px-2">Email</p>
+                    </div>
+                    <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="email" placeholder="Email" name="contactUmail"
+                            required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+
+                    <div class="col-12 col-md-3  col-xl-2">
+                        <p class=" py-1 my-0 h6 text-info px-2">Subject</p>
+                    </div>
+                    <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Subject"
+                            name="contactUsubject" required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+
+                    <div class="col-12 col-md-3  col-xl-2">
+                        <p class=" py-1 my-0 h6 text-info px-2">Message</p>
+                    </div>
+                    <div class="col-12 col-md-8 h-100 border-0 col-xl-6">
+                        <textarea class="w-100 py-1 border curve px-2" type="text" placeholder="Your Message Here...."
+                            rows="5" cols="10" name="contactUmail" required></textarea>
+                    </div>
+                </div>
+
+
+                <div class="text-center ">
+                    <span class="hoverWhite">
+                        <input type="submit" value="Send" class="my-2 py-2 px-4 curve   btn btn-outline-info">
+
+                    </span>
+
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+
+    <div class="row mx-auto justify-content-center ">
+        <div class="col-11 col-md-7 col-sm-8 col-lg-5 mx-auto mt-3 logbox curve h-100 shadow py-4">
+
+            <h3 class="text-center text-secondary mx-auto mb-4">Or</h3>
+            <div class="row">
+
+                <a href="tel:9113762945"
+                    class="text-decoration-none col-3 shadow mx-auto text-center py-2 curve btn btn-outline-primary">
+
+
+                    <i class="fa fa-phone h4 pt-2"></i>
+
+                </a>
+                <a href=""
+                    class="text-decoration-none col-3 shadow mx-auto text-center py-2 curve btn btn-outline-danger">
+                <i class="fa fa-envelope h4 pt-2"></i></a>
+                <a href=""
+                    class="text-decoration-none col-3 shadow mx-auto text-center py-2 curve btn btn-outline-success">
+                <i class="fab fa-whatsapp h4 pt-2"></i></a>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    {{>scriptcdn}}
+</body>
+
+</html>

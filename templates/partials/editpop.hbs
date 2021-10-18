@@ -1,0 +1,142 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Information Center</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body my-2">
+
+                <ul class=" px-0">
+                    <li class="row my-2 shadow curve p-2 mx-auto">
+                        <label class="col-11 text-info my-0 h5">General Details :</label>
+
+                    </li>
+                    <form action="/profile" method="POST">
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Full Name :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6 text-secondary">{{userData.fullname}}</span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Date Of Birth :</label>
+                            <p class="col-11 h6 my-1 text-secondary  col-md-7 col-lg-6">{{bdaydates.date}}-{{bdaydates.month}}-{{bdaydates.year}}</p>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Post :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text" value={{userData.post}}
+                                    name="currentPost"> </span>
+                        </li>
+
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Department :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.department}} name="currentDepartment">
+                            </span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Period therein :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="date"
+                                    value={{userData.information.postPeriod}} name="postPeriod"></span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Posting City :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.postCity}} name="postCity"></span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Posting State :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.postState}} name="postState"></span>
+                        </li>
+
+                        <li class="row my-2 mx-auto shadow curve p-2">
+                            <label class="col-11 h5 text-info   ">Personal Details:</label>
+
+                        </li>
+
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Marital Status :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6">
+
+                                <select name="marital">
+
+                                    <option value={{userData.information.marital}}>{{userData.information.marital}}
+                                    </option>
+                                    <option value="Single"> Single
+                                    </option>
+                                    <option value="Married"> Married
+                                    </option>
+                                    <option value="Engaged"> Engaged
+                                    </option>
+                                    <option value="Other"> Other
+                                    </option>
+                                </select>
+                            </span>
+                        </li>
+
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home City:</label>
+                            <span class="col-11 h6   col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.information.homeCity}} name="homeCity"></span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home District:</label>
+                            <span class="col-11 h6   col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.information.homeDist}} name="homeDist"></span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Home State:</label>
+                            <span class="col-11 h6   col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.information.homeState}} name="homeState"></span>
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Height :</label>
+                            <span class="col-10 h6 my-1  col-md-7 col-lg-6"><input type="number" min="050" max="300"
+                                    value={{userData.information.height}} name="height">cm</span>
+                        </li>
+                        <li class="row my-2 mx-auto shadow curve p-2">
+                            <label class="col-11 h5 text-info   ">Educational Details:</label>
+
+                        </li>
+
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Highest Education :</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.information.degree}} name="degree"></span>
+                        </li>
+
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">University :</label>
+                            <span class="col-11 h6   col-md-7 col-lg-6"><textarea type="text" rows="5"
+                                    name="university">{{userData.information.university}}</textarea></span>
+                        </li>
+
+                        <li class="row mt-2 mb-3 mx-auto shadow curve p-2">
+                            <label class="col-11 h5 text-info   ">Recruitment Details:</label>
+
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Recruitment type:</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="text"
+                                    value={{userData.information.recruitmentType}} name="recruitmentType">
+                        </li>
+                        <li class="row  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Year Of Appointment:</label>
+                            <span class="col-11 h6 my-1  col-md-7 col-lg-6"><input type="date" value={{userData.information.appointmentYear}}
+                                    name="appointmentYear"></span>
+                        </li>
+
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <input type="submit" class="btn btn-primary" value="Update"></input>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+

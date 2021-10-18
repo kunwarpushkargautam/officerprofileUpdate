@@ -1,0 +1,58 @@
+/* .cover{
+    background-image: url(/images/aw.jpg);
+    min-height: 100vh;
+    object-fit: cover;
+    background-size: cover;
+    
+} */
+.title span{
+  font-size: 1.7rem;
+  
+}
+
+li input{
+outline: none;
+}
+
+.noOpt{
+  pointer-events: none;
+}
+
+
+button.navbar-toggler {
+  border: none;
+}
+button.navbar-toggler:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: none;
+}
+
+.navbar-brand{
+    font-size: 2rem;
+}
+
+.logbox {
+  background-color: rgba(255, 255, 255, 0.788);
+  backdrop-filter: blur(5px);
+}
+.curve {
+  border-radius: 6px;
+}
+.img-width {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.deconone {
+  text-decoration: none;
+}
+
+.offcanvas-width {
+  top: 0;
+  left: 0;
+  width: 200px;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+}

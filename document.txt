@@ -1,0 +1,98 @@
+postPeriod: {
+    type: Date,
+    required: true,
+  },
+  // personal details starts here
+  marital: {
+    type: String,
+    required: true,
+  },
+  height: {
+    type: Number,
+    required: true,
+  },
+  homeCity: {
+    type: String,
+    required: true,
+  },
+  homeDist: {
+    type: String,
+    required: true,
+  },
+  homeState: {
+    type: String,
+    required: true,
+  },
+  //educational Details
+  degree: {
+    type: String,
+    required: true,
+  },
+  university: {
+    type: String,
+    required: true,
+  },
+
+  //recruitment details
+  recruitmentType: {
+    type: String,
+    // required: true,
+  },
+  appointmentYear: {
+    type: Date,
+    // required: true,
+  },
+
+
+
+
+
+
+
+
+  // app.post("/profile",async(req,res)=>{
+//     try{
+//         console.log("hii");
+//             const updateOfficer = new UpdateInfo({
+//                 postPeriod : req.body.postPeriod,
+//                 marital : req.body.marital,
+//                 height : req.body.height,
+//                 homeCity : req.body.homeCity,
+//                 department : req.body.currentDepartment,
+//                 postCity : req.body.postCity,
+//                 postState : req.body.postState,
+//                 homeDist : req.body.homeDist,
+//                 degree : req.body.degree,
+//                 university : req.body.university,
+//                 recruitmentType : req.body.recruitmentType,
+//                 appointmentYear : req.body.appointmentYear,
+//             })
+//            console.log("yaha tak theek hai");
+//            const updatedOfficer = await updateOfficer.save();
+//            res.status(201).render("index");
+
+        
+//     }catch(err){
+//         res.status(400).send(err);
+//     }
+     
+// })
+
+
+
+const {
+    currentPost,
+    currentDepartment,
+    postCity,
+    postState,
+    postPeriod,
+    marital,
+    homeCity,
+    homeDist,
+    homeState,
+    height,
+    degree,
+    university,
+    recruitmentType,
+    appointmentYear,
+  } = req.body;
