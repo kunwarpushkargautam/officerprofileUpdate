@@ -64,10 +64,10 @@ app.get("/help", (req, res) => {
 
 app.get("/logout", auth, async (req, res) => {
   try {
-    console.log(req.user,"pehle ka");
+    console.log(req.user, "pehle ka");
     res.clearCookie("jwt");
     await req.user.save();
-    console.log(req.user,"baad ka");
+    console.log(req.user, "baad ka");
     res.render("login");
   } catch (error) {
     res.status(500).send(error);
@@ -76,24 +76,16 @@ app.get("/logout", auth, async (req, res) => {
 
 app.get("/profile", auth, (req, res) => {
   console.log(req.user.image);
-  // const postdates = {
-  //   year: req.pdate[0],
-  //   month: req.pdate[1],
-  // };
-  // const appointdates = {
-  //   year: req.adate[0],
-  //   month: req.adate[1],
-  // };
+ 
   const bdaydates = {
     year: req.bdate[3],
     month: req.bdate[1],
     date: req.bdate[2],
   };
-
+  
   res.render("index", {
     userData: req.user,
-    // postPeriod: postdates,
-    // appointdates: appointdates,
+    
     bdaydates: bdaydates,
   });
 });
@@ -252,7 +244,6 @@ app.post("/signup", upload.single("image"), async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    
     const logInEmail = req.body.email;
     const password = req.body.password;
     console.log(logInEmail);

@@ -12,9 +12,8 @@ const auth = async (req, res, next) => {
       const user = await Register.findOne({ _id: verifyUser._id });
       // console.log(user);
       req.user = user;
-      req.token = token;
-      req.pdate =user.information.postPeriod.toString().split("-");
-      req.adate =user.information.appointmentYear.toString().split("-");
+      req.token = token; 
+      
       req.bdate =user.dob.toString().split(" ");
       
     
