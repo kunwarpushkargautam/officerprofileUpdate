@@ -16,19 +16,19 @@
             </div>
             <button class="curve bg-white border-0 my-0 py-0" type="button" class="btn  shadow text-info"
                 data-bs-toggle="modal" data-bs-target="#staticBackdropPic">
-                <i class="fa text-info fa-pen-to-square"></i>Upload
+                <i class="fa text-secondary fa-pen-to-square"></i>Upload
             </button>
         </div>
         {{>imagepicker}}
 
         <div class="row my-3 mx-auto">
-            
+
 
             <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto">
                 <!-- Button trigger modal -->
-                <div class="text-end mx-auto"><button type="button" id="edit" class="btn  shadow text-info"
+                <div class="text-end mx-auto"><button type="button" id="edit" class="btn  shadow text-secondary"
                         data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <i class="fa text-info fa-pen-to-square"></i> Edit
+                        <i class="fa text-secondary fa-pen-to-square"></i> Edit
                     </button></div>
                 <form action="/profile" method="POST">
                     <ul class=" px-0 ">
@@ -163,11 +163,11 @@
 
 
             </div>
-            <div class="row">
-                <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto"><button type="button"
-                        class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#passwordModal">
-                        Password Reset
-                    </button></div>
+            <div class="row text-center">
+                <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto"><a href="/resetPassword"><button
+                            type="button" class="btn btn-outline-secondary">
+                            Reset Password 
+                        </button></a></div>
             </div>
 
 
@@ -176,58 +176,14 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content p-3">
-                        <div class="text-end ">
-
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="/resetPassword" method="post">
-                            <div class="modal-body justify-content-center mx-auto w-100 ">
-                                <h5 class="modal-title text-center mx-auto" id="staticBackdropLabel">Reset Password</h5>
-                                <div class="row my-2 py-2 mx-auto align-item-center">
-                                    <div class="mx-auto col-11 col-md-5 px-0">
-                                        <h6 class="text-secondary">Current Password</h6>
-                                    </div>
-                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
-                                        <input type="password" class="w-100 curve" name="currentPassword">
-                                    </div>
-                                </div>
-                                <div class="row my-2 py-2 mx-auto align-item-center">
-                                    <div class="mx-auto col-11 col-md-5 px-0">
-                                        <h6 class="text-secondary">New Password</h6>
-                                    </div>
-                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
-                                        <input type="password" class="w-100 curve" name="newPassword">
-                                    </div>
-                                </div>
-                                <div class="row my-2 py-2 mx-auto align-item-center">
-                                    <div class="mx-auto col-11 col-md-5 px-0">
-                                        <h6 class="text-secondary">Confirm Password</h6>
-                                    </div>
-                                    <div class="col-11 col-md-7 px-0 border-dark border curve ">
-                                        <input type="password" class="w-100 curve" name="cNewPassword">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center justify-content-center m-1">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-outline-success px-5">Reset</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+          
         </div>
 
         {{>editfunction}}
 
 
         {{>scriptcdn}}
-        
+
 
 </body>
 

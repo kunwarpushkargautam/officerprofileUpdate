@@ -9,14 +9,15 @@
     <div class="col-11 col-sm-6 col-lg-4  my-5 mx-auto p-4 shadow logbox curve">
         <form action="/login" method="POST">
         <h2 class="text-center my-3 h1 text-info">LOGIN</h2>
+        <p class="text-center my-3 ptext-secondary">{{message}}</p>
         <div class="my-4">
             <p class="h6 text-info">Username :</p>
             <input type="email" class="px-1  border border-info py-2 curve w-100"
-            placeholder="Username" name="email">
+            placeholder="Username" name="email" required>
         </div>
         <div class="mt-4 ">
             <p class="h6 text-info">Password</p>
-            <input class=" border px-1 curve w-100 py-2 border-info" placeholder="Password" type="password" name="password">
+            <input class=" border px-1 curve w-100 py-2 border-info" placeholder="Password" type="password" name="password" required>
         </div>
         <div class="text-center mt-3"><button type="submit" class="border  bg-info text-white border-info shadow curve py-1 h5 px-5">LOGIN</button></div>
         

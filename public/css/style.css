@@ -9,7 +9,11 @@
   font-size: 1.7rem;
   
 }
-
+#preloader{
+  z-index: 999999;
+  
+  
+}
 li input{
 outline: none;
 }

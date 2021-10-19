@@ -39,7 +39,11 @@ var storage = multer.diskStorage({
 var upload = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg") {
+    if (
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpeg"
+    ) {
       callback(null, true);
     } else {
       console.log("only jpg and png file supported");
@@ -47,7 +51,10 @@ var upload = multer({
     }
   },
   limits: {
-    fileSize: 1024 * 1024 * 2,
+    fields: 5,
+    fieldNameSize: 100,
+    fieldSize: 30000,
+    fileSize: 15000000,
   },
 });
 
@@ -56,6 +63,9 @@ app.get("/", (req, res) => {
 });
 app.get("/home", (req, res) => {
   res.render("home");
+});
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
 app.get("/help", (req, res) => {
@@ -76,16 +86,16 @@ app.get("/logout", auth, async (req, res) => {
 
 app.get("/profile", auth, (req, res) => {
   console.log(req.user.image);
- 
+
   const bdaydates = {
     year: req.bdate[3],
     month: req.bdate[1],
     date: req.bdate[2],
   };
-  
+
   res.render("index", {
     userData: req.user,
-    
+
     bdaydates: bdaydates,
   });
 });
@@ -242,6 +252,15 @@ app.post("/signup", upload.single("image"), async (req, res) => {
   }
 });
 
+app.get("/resetPassword",auth, (req, res) => {
+  try{
+  res.render("password");
+  }catch(err){
+   res.render("error");
+  }
+  
+});
+
 app.post("/login", async (req, res) => {
   try {
     const logInEmail = req.body.email;
@@ -264,11 +283,52 @@ app.post("/login", async (req, res) => {
       res.status(201);
       res.redirect("/profile");
     } else {
-      res.send("password error");
+      res.status(400).render("login", { message: "Password Invalid" });
     }
   } catch (error) {
-    res.status(400).send("Invalid login details");
+    res.status(400).render("login", { message: "Invalid login details" });
   }
+});
+
+app.post("/resetPassword", auth, async (req, res) => {
+  const password = req.body.currentPassword;
+  const newPassword = req.body.newPassword;
+  const cNewPassword = req.body.cNewPassword;
+  console.log(password, newPassword, cNewPassword);
+  const email = req.user.email;
+  const userUpdateId = req.user._id.toString();
+  const userdetails = await Register.findOne({ _id: userUpdateId });
+  console.log(userdetails, "kaam kar rha hai");
+  const isPasswordMatching = await bcrypt.compare(
+    password,
+    userdetails.password
+  );
+  if (isPasswordMatching) {
+    if (newPassword === cNewPassword) {
+      Register.findById(userUpdateId, function (err, doc) {
+        if (err) return false;
+        doc.password = newPassword;
+        doc.confirmPassword = cNewPassword;
+        doc.save();
+      });
+      res
+        .status(201)
+        .render("index", { changeStatus: "Password changed Successfully" });
+      sc
+    } else {
+      res
+        .status(400)
+        .render("password", { changeStatus: "Passwords are Not Matching"  });
+      
+    }
+  } else {
+    res
+      .status(400)
+      .render("password", { changeStatus: "Current Password is wrong"  });
+    
+    console.log("current password is wrong");
+  }
+  console.log(isPasswordMatching);
 });
 
 app.listen(port, () => {

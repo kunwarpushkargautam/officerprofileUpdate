@@ -93,6 +93,10 @@ const registerSchema = new mongoose.Schema({
     type: String,
     default:"aw.jpg"
   },
+  granted:{
+    type:Boolean,
+    default:false
+  }
 },{timestamps:true});
 
 registerSchema.methods.generateAuthToken = async function () {
