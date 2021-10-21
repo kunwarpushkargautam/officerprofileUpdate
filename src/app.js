@@ -164,6 +164,9 @@ app.post("/profile", [auth, upload.single("image")], (req, res) => {
     university,
     recruitmentType,
     appointmentYear,
+    twitterProfile,
+    facebookProfile,
+    instagramProfile
   } = req.body;
 
   console.log("update wala dabba");
@@ -187,6 +190,9 @@ app.post("/profile", [auth, upload.single("image")], (req, res) => {
         university: university,
         recruitmentType: recruitmentType,
         appointmentYear: appointmentYear,
+        twitter:twitterProfile,
+        facebook:facebookProfile,
+        instagram:instagramProfile
       },
       // image:image,
     },

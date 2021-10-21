@@ -74,6 +74,21 @@ const registerSchema = new mongoose.Schema({
       default: "NA",
       //
     },
+    twitter: {
+      type: String,
+      default: "NA",
+      //
+    },
+    facebook: {
+      type: String,
+      default: "NA",
+      //
+    },
+    instagram: {
+      type: String,
+      default: "NA",
+      //
+    },
   },
   password: {
     type: String,

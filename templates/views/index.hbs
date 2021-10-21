@@ -120,7 +120,7 @@
 
                         </li>
 
-                        <li class=" row justify-content-center my-2 mx-auto shadow bg-warning  p-2">
+                        <li class=" row justify-content-center my-2 mx-auto  bg-warning  p-2">
                             <label class="col-9 h5 text-white my-1">Educational Details:</label>
 
                         </li>
@@ -136,7 +136,7 @@
                             <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
                                 value="{{userData.information.university}}" name="university">
                         </li>
-                        <li class=" row justify-content-center my-2 mx-auto shadow bg-warning  p-2">
+                        <li class=" row justify-content-center my-2 mx-auto  bg-warning  p-2">
                             <label class="col-11 h5 text-white  my-1 ">Recruitment Details:</label>
 
                         </li>
@@ -152,21 +152,53 @@
                                 value={{userData.information.appointmentYear}} name="appointmentYear">
 
                         </li>
+                        <li class=" row justify-content-center my-2 mx-auto  bg-warning  p-2">
+                            <label class="col-11 h5 text-white  my-1 ">Social Media:</label>
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Twitter Username:</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value="{{userData.information.twitter}}" name="twitterProfile">
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Facebook Username:</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value="{{userData.information.facebook}}" name="facebookProfile">
+
+                        </li>
+                        <li class=" row justify-content-center  mx-auto">
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Instagram Username:</label>
+                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
+                                value="{{userData.information.instagram}}" name="instagramProfile">
+
+                        </li>
+                        
                         <div class="mx-auto text-center my-3 d-none" id="button">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 id="cancelButton">Cancel</button>
                             <input type="submit" class="btn btn-primary" value="Update"></input>
                         </div>
                     </ul>
+
                 </form>
+
+                
+                
+
                 <!-- Button trigger modal -->
 
 
             </div>
+
+
+
+
             <div class="row text-center">
                 <div class="col-11 px-0 col-md-6 col-sm-8 py-3 curve  mx-auto"><a href="/resetPassword"><button
                             type="button" class="btn btn-outline-secondary">
-                            Reset Password 
+                            Reset Password
                         </button></a></div>
             </div>
 
@@ -176,14 +208,14 @@
 
 
             <!-- Modal -->
-          
+
         </div>
 
         {{>editfunction}}
 
 
         {{>scriptcdn}}
-        
+
 
 
 </body>
