@@ -7,6 +7,7 @@ const hbs = require("hbs");
 const { json } = require("express");
 const bcrypt = require("bcryptjs");
 const Register = require("./models/userRegisterSchema");
+const Help = require("./models/helpSchema");
 const auth = require("./auth");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
@@ -58,8 +59,15 @@ var upload = multer({
   },
 });
 
-app.get("/", (req, res) => {
-  res.render("login");
+app.get("/",  (req, res) => {
+  const token = req.cookies.jwt;
+  console.log(token)
+  if(token){
+    res.redirect("/profile");
+  }else{
+    res.render("login");
+  }
+  
 });
 app.get("/home", (req, res) => {
   res.render("home");
@@ -69,7 +77,11 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/help", (req, res) => {
-  res.render("help");
+  try {
+    res.render("help");
+  } catch (err) {
+    console.log("login kar le bhai");
+  }
 });
 
 app.get("/logout", auth, async (req, res) => {
@@ -78,7 +90,7 @@ app.get("/logout", auth, async (req, res) => {
     res.clearCookie("jwt");
     await req.user.save();
     console.log(req.user, "baad ka");
-    res.render("login");
+    res.redirect("/login");
   } catch (error) {
     res.status(500).send(error);
   }
@@ -204,7 +216,13 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 app.get("/login", (req, res) => {
-  res.render("login");
+  const token = req.cookies.jwt;
+  console.log(token)
+  if(token){
+    res.redirect("/profile");
+  }else{
+    res.render("login");
+  }
 });
 
 app.post("/signup", upload.single("image"), async (req, res) => {
@@ -229,36 +247,38 @@ app.post("/signup", upload.single("image"), async (req, res) => {
       if (req.file) {
         console.log(req.file);
       }
-
+     console.log("before token")
       const token = await registerOfficer.generateAuthToken();
-
+      console.log("after token")
       //cookies adding
-
+      console.log("before cookie")
       res.cookie("jwt", token, {
         expires: new Date(Date.now() + 18000000),
         httpOnly: true,
         // secure:true
       });
-
+      console.log("after cookie")
       const registedOfficer = await registerOfficer.save();
-
+      console.log("before render")
       res.status(201).render("index");
       res.redirect("/profile");
     } else {
+
       res.send("Password are not same");
     }
   } catch (err) {
+    console.log(" catched error")
+    console.log(err)
     res.status(400).send(err);
   }
 });
 
-app.get("/resetPassword",auth, (req, res) => {
-  try{
-  res.render("password");
-  }catch(err){
-   res.render("error");
+app.get("/resetPassword", auth, (req, res) => {
+  try {
+    res.render("password");
+  } catch (err) {
+    res.render("error");
   }
-  
 });
 
 app.post("/login", async (req, res) => {
@@ -272,15 +292,18 @@ app.post("/login", async (req, res) => {
       userdetails.password
     );
     const token = await userdetails.generateAuthToken();
-    res.cookie("jwt", token, {
-      expires: new Date(Date.now() + 18000000),
-      httpOnly: true,
-      // secure:true
-    });
-
+    const saveCookie = () => {
+      res.cookie("jwt", token, {
+        expires: new Date(Date.now() + 18000000),
+        // httpOnly: true,
+        // secure:true
+      });
+    };
     if (isPasswordMatching) {
       console.log("ok till here");
+      saveCookie();
       res.status(201);
+
       res.redirect("/profile");
     } else {
       res.status(400).render("login", { message: "Password Invalid" });
@@ -313,22 +336,63 @@ app.post("/resetPassword", auth, async (req, res) => {
       });
       res
         .status(201)
-        .render("index", { changeStatus: "Password changed Successfully" });
-      sc
+        .redirect("/profile");
     } else {
       res
         .status(400)
-        .render("password", { changeStatus: "Passwords are Not Matching"  });
-      
+        .render("password", { changeStatus: "Passwords are Not Matching" });
     }
   } else {
     res
       .status(400)
-      .render("password", { changeStatus: "Current Password is wrong"  });
-    
+      .render("password", { changeStatus: "Current Password is wrong" });
+
     console.log("current password is wrong");
   }
   console.log(isPasswordMatching);
+});
+
+app.post("/help", async (req, res) => {
+  try {
+    let querrymail = req.body.querrymail;
+    let querrysubject = req.body.querrysubject;
+    let querrytext = req.body.querrytext;
+
+    const queryUserDetails = await Register.findOne({ email: querrymail });
+    console.log("queryUserDetails");
+    console.log(queryUserDetails);
+    if (querrymail != null && querrysubject != null && querrytext != null) {
+      if (queryUserDetails != null) {
+        const helpQuerry = new Help({
+          userid: queryUserDetails._id,
+          email: querrymail,
+          topic: querrysubject,
+          message: querrytext,
+        });
+        let helpquerry = await helpQuerry.save();
+
+        res
+          .status(201)
+          .render("help", { message: "Querry Submitted, we will reply soon" });
+      } else {
+        const helpQuerry = new Help({
+          email: querrymail,
+          topic: querrysubject,
+          message: querrytext,
+        });
+        let helpquerry = await helpQuerry.save();
+
+        res
+          .status(201)
+          .render("login", { message: "Querry Submitted, we will reply soon" });
+        // res.redirect("/login");
+      }
+    } else {
+      res.status(400).render("help", { message: "Please fill all details" });
+    }
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 app.listen(port, () => {

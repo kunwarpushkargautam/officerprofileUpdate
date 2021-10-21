@@ -1,0 +1,36 @@
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }const webcookie=getCookie("jwt");
+    const login1=document.getElementById('weblogin');
+    const profile1=document.getElementById('webprofile');
+    const profile2=document.getElementById('phoneprofile');
+    const login2=document.getElementById('phonelogin');
+    const logout1=document.getElementById('weblogout');
+    const logout2=document.getElementById('phonelogout');
+    
+
+    
+    console.log(webcookie)
+    if(webcookie && webcookie !=""){
+        login1.style.display="none"; 
+        login2.style.display="none";
+        console.log("cookie present");
+        logout1.style.display="block";
+        logout2.style.display="block";
+    }else{
+        console.log("cookie absent")
+        login1.style.display="block";
+        login2.style.display="block";
+        logout1.style.display="none";
+        logout2.style.display="none";
+        profile1.style.display="none";
+        profile2.style.display="none";
+
+    }
+
+
+    
+</script>

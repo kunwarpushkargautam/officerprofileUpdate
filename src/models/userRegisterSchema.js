@@ -77,9 +77,13 @@ const registerSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    required:true,
+    minlength:8
   },
   confirmPassword: {
     type: String,
+    required:true,
+    minlength:8
   },
   tokens: [
     {
@@ -126,5 +130,5 @@ registerSchema.pre("save", async function (next) {
   next();
 });
 
-const Register = new mongoose.model("RegisteredOfficers", registerSchema);
+const Register = new mongoose.model("RegisteredOfficer", registerSchema);
 module.exports = Register;
