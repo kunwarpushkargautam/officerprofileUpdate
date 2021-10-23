@@ -115,6 +115,12 @@ const registerSchema = new mongoose.Schema({
   granted:{
     type:Boolean,
     default:false
+  },
+  resetToken:{
+    type:String
+  },
+  expireToken:{
+    type:Date
   }
 },{timestamps:true});
 

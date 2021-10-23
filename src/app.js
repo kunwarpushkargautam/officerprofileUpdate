@@ -5,13 +5,17 @@ const app = express();
 require("./db/connection");
 const hbs = require("hbs");
 const { json } = require("express");
+const url = require("url");
 const bcrypt = require("bcryptjs");
 const Register = require("./models/userRegisterSchema");
 const Help = require("./models/helpSchema");
 const auth = require("./auth");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
 
 const port = process.env.PORT || 3000;
 
@@ -59,15 +63,23 @@ var upload = multer({
   },
 });
 
-app.get("/",  (req, res) => {
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+        "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",
+    },
+  })
+);
+
+app.get("/", (req, res) => {
   const token = req.cookies.jwt;
-  console.log(token)
-  if(token){
+  console.log(token);
+  if (token) {
     res.redirect("/profile");
-  }else{
+  } else {
     res.render("login");
   }
-  
 });
 app.get("/home", (req, res) => {
   res.render("home");
@@ -166,7 +178,7 @@ app.post("/profile", [auth, upload.single("image")], (req, res) => {
     appointmentYear,
     twitterProfile,
     facebookProfile,
-    instagramProfile
+    instagramProfile,
   } = req.body;
 
   console.log("update wala dabba");
@@ -190,9 +202,9 @@ app.post("/profile", [auth, upload.single("image")], (req, res) => {
         university: university,
         recruitmentType: recruitmentType,
         appointmentYear: appointmentYear,
-        twitter:twitterProfile,
-        facebook:facebookProfile,
-        instagram:instagramProfile
+        twitter: twitterProfile,
+        facebook: facebookProfile,
+        instagram: instagramProfile,
       },
       // image:image,
     },
@@ -223,10 +235,10 @@ app.get("/signup", (req, res) => {
 });
 app.get("/login", (req, res) => {
   const token = req.cookies.jwt;
-  console.log(token)
-  if(token){
+  console.log(token);
+  if (token) {
     res.redirect("/profile");
-  }else{
+  } else {
     res.render("login");
   }
 });
@@ -253,28 +265,27 @@ app.post("/signup", upload.single("image"), async (req, res) => {
       if (req.file) {
         console.log(req.file);
       }
-     console.log("before token")
+      console.log("before token");
       const token = await registerOfficer.generateAuthToken();
-      console.log("after token")
+      console.log("after token");
       //cookies adding
-      console.log("before cookie")
+      console.log("before cookie");
       res.cookie("jwt", token, {
         expires: new Date(Date.now() + 18000000),
         httpOnly: true,
         // secure:true
       });
-      console.log("after cookie")
+      console.log("after cookie");
       const registedOfficer = await registerOfficer.save();
-      console.log("before render")
+      console.log("before render");
       res.status(201).render("index");
       res.redirect("/profile");
     } else {
-
       res.send("Password are not same");
     }
   } catch (err) {
-    console.log(" catched error")
-    console.log(err)
+    console.log(" catched error");
+    console.log(err);
     res.status(400).send(err);
   }
 });
@@ -340,9 +351,7 @@ app.post("/resetPassword", auth, async (req, res) => {
         doc.confirmPassword = cNewPassword;
         doc.save();
       });
-      res
-        .status(201)
-        .redirect("/profile");
+      res.status(201).redirect("/profile");
     } else {
       res
         .status(400)
@@ -399,6 +408,92 @@ app.post("/help", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+});
+
+app.get("/reset-password-link", (req, res) => {
+  res.render("reset-password-link");
+});
+
+app.post("/reset-password-link", (req, res) => {
+  console.log(req.body.email);
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+    }
+    const token = buffer.toString("hex");
+    Register.findOne({ email: req.body.email }).then((user) => {
+      if (!user) {
+        return res
+          .status(422)
+          .json({ error: "user dont exist with this email" });
+      }
+      user.resetToken = token;
+      user.expireToken = Date.now() + 3600000;
+      user.save().then((result) => {
+        transporter.sendMail({
+          to: user.email,
+          from: "officershelpdesk@gmail.com",
+          subject: "password reset",
+          html: `
+          <h5>Your Password change Request</h5>
+          <p>click this <a href="http://localhost:3000/reset-password/${token}">link</a></p>`,
+        });
+        res.render("login",{ message: "sent reset link , check your email" });
+      });
+    });
+  });
+});
+
+app.get("/reset-password/:token", (req, res) => {
+  const token = req.params.token;
+  res.cookie("pass", token, {
+    expires: new Date(Date.now() + 5 * 60 * 1000),
+    httpOnly: true,
+    // secure:true
+  });
+  res.render("resetPassword");
+});
+
+app.post("/reset-password", (req, res) => {
+  var queryString = url.parse(req.url, true);
+  console.log(queryString);
+
+  const sentToken = req.cookies.pass.toString();
+  const newPassword = req.body.newPassword;
+  const cNewPassword = req.body.cNewPassword;
+  if (newPassword === cNewPassword) {
+    console.log(sentToken);
+    console.log("good pass matching");
+    Register.findOne({
+      resetToken: sentToken,
+      expireToken: { $gt: Date.now() },
+    })
+      .then((user) => {
+        console.log(user);
+        if (!user) {
+          res
+            .status(422)
+            .render("error", { error: "Try again session expired" });
+        }
+        console.log("before hash");
+        bcrypt.hash(newPassword, 12).then((hashedpassword) => {
+          console.log("setting password");
+          user.password = newPassword;
+          user.confirmPassword = cNewPassword;
+          user.resetToken = undefined;
+          user.expireToken = undefined;
+          console.log("before saving");
+          user.save().then((saveduser) => {
+            res.render("login",{ message: "password updated , Login now" });
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  
 });
 
 app.listen(port, () => {
