@@ -89,19 +89,15 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/help", (req, res) => {
-  try {
-    res.render("help");
-  } catch (err) {
-    console.log("login kar le bhai");
-  }
+  res.render("help");
 });
 
 app.get("/logout", auth, async (req, res) => {
   try {
-    console.log(req.user, "pehle ka");
+    // console.log(req.user, "pehle ka");
     res.clearCookie("jwt");
     await req.user.save();
-    console.log(req.user, "baad ka");
+    // console.log(req.user, "baad ka");
     res.redirect("/login");
   } catch (error) {
     res.status(500).send(error);
@@ -159,7 +155,7 @@ app.post("/profilepic", [auth, upload.single("image")], (req, res) => {
     });
 });
 app.post("/profile", [auth, upload.single("image")], (req, res) => {
-  console.log("ye mila");
+  // console.log("ye mila");
   const userUpdateId = req.user._id.toString();
   const {
     currentPost,
@@ -181,7 +177,7 @@ app.post("/profile", [auth, upload.single("image")], (req, res) => {
     instagramProfile,
   } = req.body;
 
-  console.log("update wala dabba");
+  // console.log("update wala dabba");
 
   Register.findByIdAndUpdate(
     userUpdateId,
@@ -235,7 +231,7 @@ app.get("/signup", (req, res) => {
 });
 app.get("/login", (req, res) => {
   const token = req.cookies.jwt;
-  console.log(token);
+  // console.log(token);
   if (token) {
     res.redirect("/profile");
   } else {
@@ -263,21 +259,21 @@ app.post("/signup", upload.single("image"), async (req, res) => {
         confirmPassword: req.body.confirmPassword,
       });
       if (req.file) {
-        console.log(req.file);
+        // console.log(req.file);
       }
-      console.log("before token");
+      // console.log("before token");
       const token = await registerOfficer.generateAuthToken();
-      console.log("after token");
+      // console.log("after token");
       //cookies adding
-      console.log("before cookie");
+      // console.log("before cookie");
       res.cookie("jwt", token, {
         expires: new Date(Date.now() + 18000000),
         httpOnly: true,
         // secure:true
       });
-      console.log("after cookie");
+      // console.log("after cookie");
       const registedOfficer = await registerOfficer.save();
-      console.log("before render");
+      // console.log("before render");
       res.status(201).render("index");
       res.redirect("/profile");
     } else {
@@ -286,7 +282,7 @@ app.post("/signup", upload.single("image"), async (req, res) => {
   } catch (err) {
     console.log(" catched error");
     console.log(err);
-    res.status(400).send(err);
+    res.status(400).render("signup",{message:"oops! something went unexpected",textColor:"text-danger",borderColor:"border-danger"});
   }
 });
 
@@ -294,7 +290,13 @@ app.get("/resetPassword", auth, (req, res) => {
   try {
     res.render("password");
   } catch (err) {
-    res.render("error");
+    res.render("error", {
+      error: "something went wrong",
+      statusCode: "400",
+      desMsg: "Please try again after some time",
+      link: "/resetPassword",
+      btnName: "Reset Password",
+    });
   }
 });
 
@@ -317,16 +319,28 @@ app.post("/login", async (req, res) => {
       });
     };
     if (isPasswordMatching) {
-      console.log("ok till here");
+      // console.log("ok till here");
       saveCookie();
       res.status(201);
 
       res.redirect("/profile");
     } else {
-      res.status(400).render("login", { message: "Password Invalid" });
+      res
+        .status(400)
+        .render("login", {
+          message: "Password Invalid",
+          textColor: "text-danger",
+          borderColor: "border-danger",
+        });
     }
   } catch (error) {
-    res.status(400).render("login", { message: "Invalid login details" });
+    res
+      .status(400)
+      .render("login", {
+        message: "Invalid login details",
+        textColor: "text-danger",
+        borderColor: "border-danger",
+      });
   }
 });
 
@@ -355,12 +369,20 @@ app.post("/resetPassword", auth, async (req, res) => {
     } else {
       res
         .status(400)
-        .render("password", { changeStatus: "Passwords are Not Matching" });
+        .render("password", {
+          changeStatus: "Passwords are Not Matching",
+          textColor: "text-danger",
+          borderColor: "border-danger",
+        });
     }
   } else {
     res
       .status(400)
-      .render("password", { changeStatus: "Current Password is wrong" });
+      .render("password", {
+        changeStatus: "Current Password is wrong",
+        textColor: "text-danger",
+        borderColor: "border-danger",
+      });
 
     console.log("current password is wrong");
   }
@@ -388,7 +410,11 @@ app.post("/help", async (req, res) => {
 
         res
           .status(201)
-          .render("help", { message: "Querry Submitted, we will reply soon" });
+          .render("help", {
+            message: "Querry Submitted, we will reply soon",
+            textColor: "text-success",
+            borderColor: "border-success",
+          });
       } else {
         const helpQuerry = new Help({
           email: querrymail,
@@ -399,11 +425,21 @@ app.post("/help", async (req, res) => {
 
         res
           .status(201)
-          .render("login", { message: "Querry Submitted, we will reply soon" });
+          .render("login", {
+            message: "Querry Submitted, we will reply soon!!",
+            textColor: "text-success",
+            borderColor: "border-success",
+          });
         // res.redirect("/login");
       }
     } else {
-      res.status(400).render("help", { message: "Please fill all details" });
+      res
+        .status(400)
+        .render("help", {
+          message: "Please fill all details",
+          textColor: "text-warning",
+          borderColor: "border-warning",
+        });
     }
   } catch (err) {
     res.status(400).send(err);
@@ -425,7 +461,11 @@ app.post("/reset-password-link", (req, res) => {
       if (!user) {
         return res
           .status(422)
-          .json({ error: "user dont exist with this email" });
+          .render("reset-password-link", {
+            message: "user dont exist with this email",
+            textColor: "text-danger",
+            borderColor: "border-danger",
+          });
       }
       user.resetToken = token;
       user.expireToken = Date.now() + 3600000;
@@ -435,22 +475,22 @@ app.post("/reset-password-link", (req, res) => {
           from: "officershelpdesk@gmail.com",
           subject: "password reset",
           html: `
-          <h5>Your Password change Request</h5>
+          <h1>Your Password change Request</h1>
           <p>click this <a href="http://localhost:3000/reset-password/${token}">link</a></p>`,
         });
-        res.render("login",{ message: "sent reset link , check your email" });
+        res.render("login", {
+          message: "Reset link sent on Your mail",
+          textColor: "text-success",
+          borderColor: "border-success",
+        });
       });
     });
   });
 });
-
+var sentToken = "";
 app.get("/reset-password/:token", (req, res) => {
-  const token = req.params.token;
-  res.cookie("pass", token, {
-    expires: new Date(Date.now() + 5 * 60 * 1000),
-    httpOnly: true,
-    // secure:true
-  });
+  sentToken = req.params.token;
+
   res.render("resetPassword");
 });
 
@@ -458,7 +498,7 @@ app.post("/reset-password", (req, res) => {
   var queryString = url.parse(req.url, true);
   console.log(queryString);
 
-  const sentToken = req.cookies.pass.toString();
+  // const sentToken = req.cookies.pass.toString();
   const newPassword = req.body.newPassword;
   const cNewPassword = req.body.cNewPassword;
   if (newPassword === cNewPassword) {
@@ -473,7 +513,13 @@ app.post("/reset-password", (req, res) => {
         if (!user) {
           res
             .status(422)
-            .render("error", { error: "Try again session expired" });
+            .render("error", {
+              error: "Try again session expired",
+              statusCode: "422",
+              desMsg: "link expired.. request it again!!",
+              link: "/reset-password-link",
+              btnName: "Reset Link",
+            });
         }
         console.log("before hash");
         bcrypt.hash(newPassword, 12).then((hashedpassword) => {
@@ -484,7 +530,11 @@ app.post("/reset-password", (req, res) => {
           user.expireToken = undefined;
           console.log("before saving");
           user.save().then((saveduser) => {
-            res.render("login",{ message: "password updated , Login now" });
+            res.render("login", {
+              message: "password updated , Login now",
+              textColor: "text-success",
+              borderColor: "border-success",
+            });
           });
         });
       })
@@ -492,8 +542,6 @@ app.post("/reset-password", (req, res) => {
         console.log(err);
       });
   }
-
-  
 });
 
 app.listen(port, () => {

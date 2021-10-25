@@ -16,7 +16,7 @@
             </div>
             <button class="curve bg-white border-0 my-0 py-0" type="button" class="btn  shadow text-info"
                 data-bs-toggle="modal" data-bs-target="#staticBackdropPic">
-                <i class="fa text-secondary fa-pen-to-square"></i>Upload
+                <i class="fa text-secondary fa-pen-to-square"></i>Upload Pic
             </button>
         </div>
         {{>imagepicker}}
@@ -37,7 +37,7 @@
 
                         </li>
                         <li class=" row justify-content-center  mx-auto justify-content-center">
-                            <label class="col-11  my-1   col-md-5 col-lg-5">Fullname</label>
+                            <label class="col-11  my-1   col-md-5 col-lg-5">Full Name:</label>
                             <span class="col-11 h6 my-1  col-md-7 col-lg-6 text-secondary">{{userData.fullname}}</span>
                         </li>
                         <li class=" row justify-content-center  mx-auto">
@@ -47,33 +47,33 @@
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Post :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.post}}" name="currentPost">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.post}}" name="currentPost">
                         </li>
 
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Department :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.department}}" name="currentDepartment">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.department}}" name="currentDepartment">
 
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Period therein :</label>
-                            <input type="date" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.postPeriod}}" name="postPeriod">
+                            <input type="date" class="col-11 h6 border bg-white my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.postPeriod}}" name="postPeriod">
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Posting City :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.postCity}}" name="postCity">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.postCity}}" name="postCity">
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Posting State :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.postState}}" name="postState">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.postState}}" name="postState">
                         </li>
 
-                        <li class=" row justify-content-center my-2 mx-auto bg-warning shadow  p-2 ">
+                        <li class=" row justify-content-center my-2 mx-auto bg-warning   p-2 ">
                             <label class="col-9  my-1    col-lg-11 h5 text-white   ">Personal Details:</label>
 
                         </li>
@@ -81,7 +81,9 @@
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Marital Status :</label>
 
-                            <select name="marital" class="col-11 h6 border  my-1  col-md-7 col-lg-6 noOpt" id="marital">
+                            <select name="marital"
+                                class="col-11 h6 border  my-1 py-2  curve col-md-7 col-lg-6 bg-white noOpt"
+                                id="marital">
 
 
                                 <option value={{userData.information.marital}}>{{userData.information.marital}}
@@ -99,24 +101,24 @@
 
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Home City:</label>
-                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                            <input type="text" class="col-11 h6 border  py-2 curve  col-md-7 col-lg-6" readonly="true"
                                 value="{{userData.information.homeCity}}" name="homeCity">
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Home District:</label>
-                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                            <input type="text" class="col-11 h6 border  py-2 curve  col-md-7 col-lg-6" readonly="true"
                                 value="{{userData.information.homeDist}}" name="homeDist">
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Home State:</label>
-                            <input type="text" class="col-11 h6 border    col-md-7 col-lg-6" readonly="true"
+                            <input type="text" class="col-11 h6 border  py-2 curve  col-md-7 col-lg-6" readonly="true"
                                 value="{{userData.information.homeState}}" name="homeState">
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Height :</label>
-                            <input type="number" class="col-8 h6 border    col-md-6 col-lg-5" min="050" max="300"
-                                readonly="true" value={{userData.information.height}} name="height"><span
-                                class="col-3 h6   col-md-1 col-lg-1">cm</span>
+                            <input type="number" class="col-8 h6 border py-2 curve   col-md-6 col-lg-5" min="050"
+                                max="300" readonly="true" value={{userData.information.height}} name="height"><span
+                                class="col-3 h6   col-md-1 col-lg-1 py-2">cm</span>
 
                         </li>
 
@@ -127,14 +129,14 @@
 
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Highest Education :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.degree}}" name="degree">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.degree}}" name="degree">
                         </li>
 
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">University :</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.university}}" name="university">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.university}}" name="university">
                         </li>
                         <li class=" row justify-content-center my-2 mx-auto  bg-warning  p-2">
                             <label class="col-11 h5 text-white  my-1 ">Recruitment Details:</label>
@@ -142,14 +144,14 @@
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Recruitment type:</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.recruitmentType}}" name="recruitmentType">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.recruitmentType}}" name="recruitmentType">
 
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Year Of Induction:</label>
-                            <input type="date" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value={{userData.information.appointmentYear}} name="appointmentYear">
+                            <input type="date" class="col-11 h6 border  my-1 py-2 curve bg-white col-md-7 col-lg-6"
+                                readonly="true" value={{userData.information.appointmentYear}} name="appointmentYear">
 
                         </li>
                         <li class=" row justify-content-center my-2 mx-auto  bg-warning  p-2">
@@ -158,23 +160,23 @@
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Twitter Username:</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.twitter}}" name="twitterProfile">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.twitter}}" name="twitterProfile">
 
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Facebook Username:</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.facebook}}" name="facebookProfile">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.facebook}}" name="facebookProfile">
 
                         </li>
                         <li class=" row justify-content-center  mx-auto">
                             <label class="col-11  my-1   col-md-5 col-lg-5">Instagram Username:</label>
-                            <input type="text" class="col-11 h6 border  my-1  col-md-7 col-lg-6" readonly="true"
-                                value="{{userData.information.instagram}}" name="instagramProfile">
+                            <input type="text" class="col-11 h6 border  my-1 py-2 curve col-md-7 col-lg-6"
+                                readonly="true" value="{{userData.information.instagram}}" name="instagramProfile">
 
                         </li>
-                        
+
                         <div class="mx-auto text-center my-3 d-none" id="button">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 id="cancelButton">Cancel</button>
@@ -184,8 +186,8 @@
 
                 </form>
 
-                
-                
+
+
 
                 <!-- Button trigger modal -->
 
@@ -210,11 +212,12 @@
             <!-- Modal -->
 
         </div>
+{{>footer}}
+    </div>
+    {{>editfunction}}
 
-        {{>editfunction}}
 
-
-        {{>scriptcdn}}
+    {{>scriptcdn}}
 
 
 

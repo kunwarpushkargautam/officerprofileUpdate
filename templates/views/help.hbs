@@ -7,9 +7,9 @@
 
     {{>navbar}}
     <!--Section: Contact v.2-->
-    <div class="col-11 col-sm-6 col-lg-4  my-3 mx-auto shadow logbox curve p-2 border border-info"
+    <div class="col-11 col-sm-6 col-lg-4  my-3 mx-auto shadow logbox curve p-2 border {{borderColor}}"
         id="helpnotice">
-        <h5 class="text-info text-center " id="helpNoticeText">{{message}}</h5>
+        <h5 class="{{textColor}} text-center " id="helpNoticeText">{{message}}</h5>
     </div>
 
     <div class="row mx-auto justify-content-center mt-4">
@@ -89,6 +89,7 @@
 
 
         </div>
+        {{>footer}}
     </div>
 
     
