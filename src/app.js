@@ -104,6 +104,35 @@ app.get("/logout", auth, async (req, res) => {
   }
 });
 
+app.get("/users", (req, res) => {
+  Register.find()
+    .then((result) => {
+      res.status(200).json({
+        alloffficers: result,
+      });
+    })  
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+});
+app.get("/querry", (req, res) => {
+  Help.find()
+    .then((result) => {
+      res.status(200).json({
+        allquerry: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
 app.get("/profile", auth, (req, res) => {
   console.log(req.user.image);
 
@@ -282,7 +311,13 @@ app.post("/signup", upload.single("image"), async (req, res) => {
   } catch (err) {
     console.log(" catched error");
     console.log(err);
-    res.status(400).render("signup",{message:"oops! something went unexpected",textColor:"text-danger",borderColor:"border-danger"});
+    res
+      .status(400)
+      .render("signup", {
+        message: "oops! something went unexpected",
+        textColor: "text-danger",
+        borderColor: "border-danger",
+      });
   }
 });
 
@@ -325,22 +360,18 @@ app.post("/login", async (req, res) => {
 
       res.redirect("/profile");
     } else {
-      res
-        .status(400)
-        .render("login", {
-          message: "Password Invalid",
-          textColor: "text-danger",
-          borderColor: "border-danger",
-        });
-    }
-  } catch (error) {
-    res
-      .status(400)
-      .render("login", {
-        message: "Invalid login details",
+      res.status(400).render("login", {
+        message: "Password Invalid",
         textColor: "text-danger",
         borderColor: "border-danger",
       });
+    }
+  } catch (error) {
+    res.status(400).render("login", {
+      message: "Invalid login details",
+      textColor: "text-danger",
+      borderColor: "border-danger",
+    });
   }
 });
 
@@ -367,22 +398,18 @@ app.post("/resetPassword", auth, async (req, res) => {
       });
       res.status(201).redirect("/profile");
     } else {
-      res
-        .status(400)
-        .render("password", {
-          changeStatus: "Passwords are Not Matching",
-          textColor: "text-danger",
-          borderColor: "border-danger",
-        });
-    }
-  } else {
-    res
-      .status(400)
-      .render("password", {
-        changeStatus: "Current Password is wrong",
+      res.status(400).render("password", {
+        changeStatus: "Passwords are Not Matching",
         textColor: "text-danger",
         borderColor: "border-danger",
       });
+    }
+  } else {
+    res.status(400).render("password", {
+      changeStatus: "Current Password is wrong",
+      textColor: "text-danger",
+      borderColor: "border-danger",
+    });
 
     console.log("current password is wrong");
   }
@@ -408,13 +435,11 @@ app.post("/help", async (req, res) => {
         });
         let helpquerry = await helpQuerry.save();
 
-        res
-          .status(201)
-          .render("help", {
-            message: "Querry Submitted, we will reply soon",
-            textColor: "text-success",
-            borderColor: "border-success",
-          });
+        res.status(201).render("help", {
+          message: "Querry Submitted, we will reply soon",
+          textColor: "text-success",
+          borderColor: "border-success",
+        });
       } else {
         const helpQuerry = new Help({
           email: querrymail,
@@ -423,23 +448,19 @@ app.post("/help", async (req, res) => {
         });
         let helpquerry = await helpQuerry.save();
 
-        res
-          .status(201)
-          .render("login", {
-            message: "Querry Submitted, we will reply soon!!",
-            textColor: "text-success",
-            borderColor: "border-success",
-          });
+        res.status(201).render("login", {
+          message: "Querry Submitted, we will reply soon!!",
+          textColor: "text-success",
+          borderColor: "border-success",
+        });
         // res.redirect("/login");
       }
     } else {
-      res
-        .status(400)
-        .render("help", {
-          message: "Please fill all details",
-          textColor: "text-warning",
-          borderColor: "border-warning",
-        });
+      res.status(400).render("help", {
+        message: "Please fill all details",
+        textColor: "text-warning",
+        borderColor: "border-warning",
+      });
     }
   } catch (err) {
     res.status(400).send(err);
@@ -459,13 +480,11 @@ app.post("/reset-password-link", (req, res) => {
     const token = buffer.toString("hex");
     Register.findOne({ email: req.body.email }).then((user) => {
       if (!user) {
-        return res
-          .status(422)
-          .render("reset-password-link", {
-            message: "user dont exist with this email",
-            textColor: "text-danger",
-            borderColor: "border-danger",
-          });
+        return res.status(422).render("reset-password-link", {
+          message: "user dont exist with this email",
+          textColor: "text-danger",
+          borderColor: "border-danger",
+        });
       }
       user.resetToken = token;
       user.expireToken = Date.now() + 3600000;
@@ -511,15 +530,13 @@ app.post("/reset-password", (req, res) => {
       .then((user) => {
         console.log(user);
         if (!user) {
-          res
-            .status(422)
-            .render("error", {
-              error: "Try again session expired",
-              statusCode: "422",
-              desMsg: "link expired.. request it again!!",
-              link: "/reset-password-link",
-              btnName: "Reset Link",
-            });
+          res.status(422).render("error", {
+            error: "Try again session expired",
+            statusCode: "422",
+            desMsg: "link expired.. request it again!!",
+            link: "/reset-password-link",
+            btnName: "Reset Link",
+          });
         }
         console.log("before hash");
         bcrypt.hash(newPassword, 12).then((hashedpassword) => {
