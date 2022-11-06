@@ -1,7 +1,6 @@
 {
   "name": "projectofficerprofile",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,15 +10,26 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "hbs": "^4.1.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "nodemon": "^2.0.13"
-  }
+    "nodemon": "^2.0.20"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunwarpushkargautam/officerprofileUpdate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kunwarpushkargautam/officerprofileUpdate/issues"
+  },
+  "homepage": "https://github.com/kunwarpushkargautam/officerprofileUpdate#readme",
+  "description": ""
 }

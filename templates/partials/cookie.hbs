@@ -1,9 +1,11 @@
 <script>
     function getCookie(name) {
         const value = `; ${document.cookie}`;
+        console.log(value);
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
-    }const webcookie=getCookie("jwt");
+    }
+    const webcookie=getCookie("jwt");
     const login1=document.getElementById('weblogin');
     const profile1=document.getElementById('webprofile');
     const profile2=document.getElementById('phoneprofile');

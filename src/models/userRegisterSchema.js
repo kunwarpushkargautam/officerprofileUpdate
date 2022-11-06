@@ -2,127 +2,130 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const registerSchema = new mongoose.Schema({
-  fullname: {
-    type: String,
-  },
-  dob: {
-    type: Date,
-  },
-  email: {
-    type: String,
+const registerSchema = new mongoose.Schema(
+  {
+    fullname: {
+      type: String,
+    },
+    dob: {
+      type: Date,
+    },
+    email: {
+      type: String,
 
-    unique: true,
-  },
-  post: {
-    type: String,
-  },
-  department: {
-    type: String,
-  },
-
-  postCity: {
-    type: String,
-  },
-  postState: {
-    type: String,
-  },
-  information: {
-    postPeriod: {
-      type: String,
-      default: "NA",
+      unique: true,
     },
-    // personal details starts here
-    marital: {
+    post: {
       type: String,
-      default: "NA",
     },
-    height: {
-      type: Number,
-      default: 0,
-    },
-    homeCity: {
+    department: {
       type: String,
-      default: "NA",
-    },
-    homeDist: {
-      type: String,
-      default: "NA",
-    },
-    homeState: {
-      type: String,
-      default: "NA",
-    },
-    //educational Details
-    degree: {
-      type: String,
-      default: "NA",
-    },
-    university: {
-      type: String,
-      default: "NA",
     },
 
-    //recruitment details
-    recruitmentType: {
+    postCity: {
       type: String,
-      default: "NA",
-      //
     },
-    appointmentYear: {
+    postState: {
       type: String,
-      default: "NA",
-      //
     },
-    twitter: {
-      type: String,
-      default: "NA",
-      //
-    },
-    facebook: {
-      type: String,
-      default: "NA",
-      //
-    },
-    instagram: {
-      type: String,
-      default: "NA",
-      //
-    },
-  },
-  password: {
-    type: String,
-    required:true,
-    minlength:8
-  },
-  confirmPassword: {
-    type: String,
-    required:true,
-    minlength:8
-  },
-  tokens: [
-    {
-      token: {
+    information: {
+      postPeriod: {
         type: String,
-        required: true,
+        default: "NA",
+      },
+      // personal details starts here
+      marital: {
+        type: String,
+        default: "NA",
+      },
+      height: {
+        type: Number,
+        default: 0,
+      },
+      homeCity: {
+        type: String,
+        default: "NA",
+      },
+      homeDist: {
+        type: String,
+        default: "NA",
+      },
+      homeState: {
+        type: String,
+        default: "NA",
+      },
+      //educational Details
+      degree: {
+        type: String,
+        default: "NA",
+      },
+      university: {
+        type: String,
+        default: "NA",
+      },
+
+      //recruitment details
+      recruitmentType: {
+        type: String,
+        default: "NA",
+        //
+      },
+      appointmentYear: {
+        type: String,
+        default: "NA",
+        //
+      },
+      twitter: {
+        type: String,
+        default: "NA",
+        //
+      },
+      facebook: {
+        type: String,
+        default: "NA",
+        //
+      },
+      instagram: {
+        type: String,
+        default: "NA",
+        //
       },
     },
-  ],
-  image: { 
-    type: String,
-    default:"aw.jpg"
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+    },
+    confirmPassword: {
+      type: String,
+      required: true,
+      minlength: 8,
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    image: {
+      type: String,
+      default: "aw.jpg",
+    },
+    granted: {
+      type: Boolean,
+      default: false,
+    },
+    resetToken: {
+      type: String,
+    },
+    expireToken: {
+      type: Date,
+    },
   },
-  granted:{
-    type:Boolean,
-    default:false
-  },
-  resetToken:{
-    type:String
-  },
-  expireToken:{
-    type:Date
-  }
-},{timestamps:true});
+  { timestamps: true }
+);
 
 registerSchema.methods.generateAuthToken = async function () {
   try {

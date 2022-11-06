@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://localhost:27017/officer", {
+  .connect("mongodb+srv://myselfmrkunwar:abcdef123@cluster0.hmcj0.mongodb.net/OfficerProfile?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useNewUrlParser: true,
+    // useFindAndModify:false
   })
   .then(() => {
     console.log("connection ok");
@@ -10,3 +12,4 @@ mongoose
   .catch((e) => {
     console.log(e);
   });
+//mongodb+srv://myselfmrkunwar:myselfmrkunwar@cluster0.hmcj0.mongodb.net/OfficerProfile

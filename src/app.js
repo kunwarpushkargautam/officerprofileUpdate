@@ -16,7 +16,7 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
-
+const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 const static_path = path.join(__dirname, "../public");
@@ -26,6 +26,8 @@ const partial_path = path.join(__dirname, "../templates/partials");
 app.use(express.static(static_path));
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
 app.set("views", views_path);
@@ -110,7 +112,7 @@ app.get("/users", (req, res) => {
       res.status(200).json({
         alloffficers: result,
       });
-    })  
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json({
@@ -128,13 +130,13 @@ app.get("/querry", (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 });
 
 app.get("/profile", auth, (req, res) => {
-  console.log(req.user.image);
+  // console.log(req.user.image);
 
   const bdaydates = {
     year: req.bdate[3],
@@ -150,7 +152,7 @@ app.get("/profile", auth, (req, res) => {
 });
 
 app.post("/profilepic", [auth, upload.single("image")], (req, res) => {
-  console.log("ye mila");
+  console.log("req",req.user);
   const userUpdateId = req.user._id.toString();
 
   console.log("update wala image");
@@ -184,7 +186,7 @@ app.post("/profilepic", [auth, upload.single("image")], (req, res) => {
     });
 });
 app.post("/profile", [auth, upload.single("image")], (req, res) => {
-  // console.log("ye mila");
+  console.log("ye mila",req.user);
   const userUpdateId = req.user._id.toString();
   const {
     currentPost,
@@ -281,9 +283,6 @@ app.post("/signup", upload.single("image"), async (req, res) => {
         department: req.body.currentDepartment,
         postCity: req.body.postCity,
         postState: req.body.postState,
-
-        // clear
-
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
       });
@@ -294,13 +293,13 @@ app.post("/signup", upload.single("image"), async (req, res) => {
       const token = await registerOfficer.generateAuthToken();
       // console.log("after token");
       //cookies adding
-      // console.log("before cookie");
+      console.log("before cookie");
       res.cookie("jwt", token, {
         expires: new Date(Date.now() + 18000000),
-        httpOnly: true,
+        // httpOnly: true,  //uncommenting this led to cookie save problem
         // secure:true
       });
-      // console.log("after cookie");
+      console.log("after cookie");
       const registedOfficer = await registerOfficer.save();
       // console.log("before render");
       res.status(201).render("index");
@@ -311,13 +310,11 @@ app.post("/signup", upload.single("image"), async (req, res) => {
   } catch (err) {
     console.log(" catched error");
     console.log(err);
-    res
-      .status(400)
-      .render("signup", {
-        message: "oops! something went unexpected",
-        textColor: "text-danger",
-        borderColor: "border-danger",
-      });
+    res.status(400).render("signup", {
+      message: "oops! something went unexpected",
+      textColor: "text-danger",
+      borderColor: "border-danger",
+    });
   }
 });
 
